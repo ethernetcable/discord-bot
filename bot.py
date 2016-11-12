@@ -4,7 +4,7 @@ from urllib import request
 from time import sleep 
 
 client = discord.Client()
-token = 'MjQ2NzczODM3MzE0Nzg1Mjgw.CwfhkQ.PDeRLB3PRqbMggffrAIQrPgImrE'
+token = 'xxxx'
 
 async def wikihow(message):
     try:
