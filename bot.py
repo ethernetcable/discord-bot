@@ -19,7 +19,7 @@ shank_bank = ['\*shanks %s*',
               '\*%s dies of old age*',
               '\*%s falls over and dies*',
               '\*%s hooks up with a nigerian prince, proceeds '
-              'to die of bankruptcy']
+              'to die of bankruptcy*']
 
 ong_words = ['strong',
              'pong',
