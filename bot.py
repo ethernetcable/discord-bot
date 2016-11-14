@@ -21,22 +21,6 @@ shank_bank = ['\*shanks %s*',
               '\*%s hooks up with a nigerian prince, proceeds '
               'to die of bankruptcy*']
 
-ong_words = ['strong',
-             'pong',
-             'glong',
-             'fong',
-             'kong',
-             'long',
-             'trong',
-             'frong',
-             'tong',
-             'extremely long',
-             'donald trong',
-             'michael gong',
-             'kit smong',
-             'jomes phillong',
-             'aaron hong']
-
 async def wikihow(message):
     try:
         url = 'http://www.wikihow.com/Special:Random'
@@ -45,16 +29,9 @@ async def wikihow(message):
         await client.send_message(message.channel, msg)
         print('sent: ' + msg)
     except:
-        print('wikihow fail')
-
-async def bigben(message):
-    try:
-        num = randint(0, len(ong_words) - 1)
-        msg = ong_words[num]
-        await client.send_message(message.channel, msg)
-        print('sent: ' + msg)
-    except:
-        print('bigben fail')
+        print('retrying wikihow')
+        sleep(0.1)
+        await wikihow(message)
 
 async def test(message):
     try:
@@ -73,6 +50,28 @@ async def kill(message):
     except:
         print('kill failed')
 
+async def commands(message):
+    try:
+        msg = 'commands:\n`!kill`\n`!wikihow`\n`!test`\n`!wikicommands`\n`!ouch`'
+        await client.send_message(message.channel, msg)
+        print('sent: commands')
+    except:
+        print('commands fail')
+
+async def ouch(message):
+    try:
+        await client.send_message(message.channel, 'ouch', tts=True)
+        print('said ouch')
+    except:
+        print('ouch fail')
+
+async def shout(message):
+    try:
+        await client.send_message(message.channel, 'shhh i\'m trying to sleep')
+        print('someone is being very loud')
+    except:
+        print('shout fail')
+
 @client.event
 async def on_message(message):
     if message.content.startswith('!wikihow'):
@@ -83,5 +82,12 @@ async def on_message(message):
         await test(message)
     if message.content.startswith('!kill'):
         await kill(message)
+    if message.content.startswith('!wikicommands'):
+        await commands(message)
+    if message.content.startswith('!ouch'):
+        await ouch(message)
+    uppers = [i for i in message.content if i.isupper()]
+    if len(uppers) > 4:
+        await shout(message)
 
 client.run(token)
