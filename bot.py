@@ -7,8 +7,6 @@ from random import randint
 client = discord.Client()
 token = 'xxxx'
 
-user = ''
-
 shank_bank = ['\*shanks %s*',
               '\*shivs %s*',
               '\*rips out %s\'s heart and feeds it to him*',
