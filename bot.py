@@ -99,6 +99,11 @@ async def kit(message):
         await kit(message)
         
 @client.event
+async def on_ready():
+    print('Logged in as: ' + client.user.name)
+    print('-----')
+        
+@client.event
 async def on_message(message):
     if message.content.startswith('!wikihow'):
         await wikihow(message)
@@ -115,7 +120,7 @@ async def on_message(message):
         await shout(message)
     if message.content.startswith('!trump'):
         await trump(message)
-    if message.content.startswith('!rank'):
+    if message.content.startswith('!rank') and author.user.id != '159985870458322944':
         await kit(message)
 
 client.run(token)
