@@ -10,7 +10,6 @@ token = 'xxxx'
 
 CONSUMER_KEY = 'yyyy'
 CONSUMER_SECRET = 'zzzz'
-
 twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET)
 
 shank_bank = ['\*shanks %s*',
