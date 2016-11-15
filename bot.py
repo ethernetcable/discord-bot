@@ -76,8 +76,6 @@ async def shout(message):
 async def on_message(message):
     if message.content.startswith('!wikihow'):
         await wikihow(message)
-    if 'BONG' in message.content:
-        await bigben(message)
     if message.content.startswith('test'):
         await test(message)
     if message.content.startswith('!kill'):
