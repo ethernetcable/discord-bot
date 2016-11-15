@@ -3,9 +3,15 @@ from bs4 import BeautifulSoup
 from urllib import request
 from time import sleep 
 from random import randint
+from twython import Twython, TwythonError
 
 client = discord.Client()
 token = 'xxxx'
+
+CONSUMER_KEY = 'yyyy'
+CONSUMER_SECRET = 'zzzz'
+
+twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET)
 
 shank_bank = ['\*shanks %s*',
               '\*shivs %s*',
@@ -25,12 +31,12 @@ async def wikihow(message):
     try:
         url = 'http://www.wikihow.com/Special:Random'
         soup = BeautifulSoup(request.urlopen(url), 'html.parser')
-        msg = soup.title.prettify()[8:-10]
+        msg = soup.title.prettify()[8:-10].lower()
         await client.send_message(message.channel, msg)
         print('sent: ' + msg)
     except:
-        print('retrying wikihow')
         sleep(0.1)
+        print('retrying wikihow')
         await wikihow(message)
 
 async def test(message):
@@ -52,7 +58,7 @@ async def kill(message):
 
 async def commands(message):
     try:
-        msg = 'commands:\n`!kill`\n`!wikihow`\n`!test`\n`!wikicommands`\n`!ouch`'
+        msg = 'commands:\n`!kill`\n`!wikihow`\n`!test`\n`!wikicommands`\n`!ouch`\n`!trump`'
         await client.send_message(message.channel, msg)
         print('sent: commands')
     except:
@@ -72,11 +78,32 @@ async def shout(message):
     except:
         print('shout fail')
 
+async def trump(message):
+    try:
+        trump = 'realDonaldTrump'
+        tweet = twitter.get_user_timeline(screen_name=trump, count=1)[0]['text']
+        msg = 'trump tweeted: ' + tweet
+        await client.send_message(message.channel, msg)
+        print('sent: ' + msg)
+    except:
+        sleep(0.1)
+        print('retrying trump')
+        await trump(message)
+
+async def kit(message):
+    try:
+        await client.send_message(message.channel, 'kit smells')
+        print('kit smells')
+    except:
+        sleep(0.1)
+        print('retrying kit')
+        await kit(message)
+        
 @client.event
 async def on_message(message):
     if message.content.startswith('!wikihow'):
         await wikihow(message)
-    if message.content.startswith('test'):
+    if message.content.startswith('!test'):
         await test(message)
     if message.content.startswith('!kill'):
         await kill(message)
@@ -87,5 +114,9 @@ async def on_message(message):
     uppers = [i for i in message.content if i.isupper()]
     if len(uppers) > 4:
         await shout(message)
+    if message.content.startswith('!trump'):
+        await trump(message)
+    if message.content.startswith('!rank'):
+        await kit(message)
 
 client.run(token)
