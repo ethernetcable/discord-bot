@@ -1,2 +1,2 @@
 # discord-bot
-involves wikihow
+multi-purpose bot for all your automated needs
