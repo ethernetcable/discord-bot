@@ -116,11 +116,11 @@ async def on_message(message):
     if message.content.startswith('!ouch'):
         await ouch(message)
     uppers = [i for i in message.content if i.isupper()]
-    if len(uppers) > 4:
+    if len(uppers) > 7 and author.user.id != '159985870458322944':
         await shout(message)
     if message.content.startswith('!trump'):
         await trump(message)
-    if message.content.startswith('!rank') and author.user.id != '159985870458322944':
+    if message.content.startswith('!rank')
         await kit(message)
 
 client.run(token)
